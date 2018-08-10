@@ -1,8 +1,9 @@
 import $ from 'jquery';
-import 'bootstrap';
+import '../../../Library/Caches/typescript/2.9/node_modules/@types/bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Condition } from './condition';
+import { Practice } from './practice';
 
 function loadConditions() {
   const condition = new Condition();
@@ -23,10 +24,23 @@ function addToSelect(conditions) {
   });
 }
 
+function loadPracticeByCondition(condition) {
+  let allPractices = Practice.getPracticeByCondition(condition);
+
+  allPractices.then((response) => {
+    const practiceList = Practice.getPracticeList(response);
+    console.log(practiceList);
+  }, (error) => {
+    console.log(error.message);
+  });
+}
+
 $(document).ready(function() {
   loadConditions();
 
-  $('search-conditions').click(function() {
+  $('#search-conditions').click(function() {
     console.log('clicked search');
+    let condition = $(this).val();
+    loadPracticeByCondition(condition);
   });
 });
