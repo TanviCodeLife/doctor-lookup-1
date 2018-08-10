@@ -40,7 +40,8 @@ $(document).ready(function() {
 
   $('#search-conditions').click(function() {
     console.log('clicked search');
-    let condition = $(this).val();
+    let condition = $('#conditions-select').val();
+    console.log(condition);
     loadPracticeByCondition(condition);
   });
 });
