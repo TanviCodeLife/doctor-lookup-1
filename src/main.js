@@ -48,10 +48,19 @@ function resultsByCondition(condition) {
 }
 
 function displayResults(doctors) {
+  if (doctors.length === 0) noResultsFound();
+
   doctors.forEach((doctor) => {
     appendDoctor(doctor);
     appendPractices(doctor);
   });
+}
+
+function noResultsFound() {
+  const doctorCard = `<div class='doctor-card'>
+                        <p>No results match your search criteria. Please try again.</p>
+                      </div>`;
+  $('.results-box').append(doctorCard);
 }
 
 function appendDoctor(doctor) {
@@ -65,14 +74,28 @@ function appendDoctor(doctor) {
 
 function appendPractices(doctor) {
   doctor.practices.forEach((practice) => {
+    let phoneNumber = formattedPhone(practice.phone);
     let listItem = `<li class='practice-list-item'>
                       ${practice.name}<br/>
-                      ${practice.phone}<br/>
+                      <a href='tel:${phoneNumber}'>${phoneNumber}</a><br/>
+                      <a href='${practice.website}' target='_blank'>${practice.website}</a><br/>
                       ${practice.address.street}<br/>
                       ${practice.address.city}, ${practice.address.state} ${practice.address.zip}<br/>
                     </li>`;
     $(`#${doctor.firstName}-${doctor.lastName}-practices`).append(listItem);
   });
+}
+
+function formattedPhone(phone) {
+  const numbers = phone.split('');
+  numbers.splice(3,0,'-');
+  numbers.splice(7,0,'-');
+  const newPhone = numbers.join('');
+  return newPhone;
+}
+
+function resetResults() {
+  $('.doctor-card').empty();
 }
 
 $(document).ready(function() {
@@ -84,5 +107,9 @@ $(document).ready(function() {
     showElement('.processing-box');
     let condition = $('#conditions-select').val();
     resultsByCondition(condition);
+  });
+
+  $('#conditions-select').click(function() {
+    resetResults();
   });
 });

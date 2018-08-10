@@ -42,10 +42,12 @@ export class Doctor {
         practice.uid,
         practice.name,
         practice.visit_address,
-        practice.phones.number,
+        practice.phones[0].number,
+        practice.website,
         practice.accepts_new_patients
       );
       Practice.checkPhone(newPractice);
+      Practice.checkWebsite(newPractice);
       doctor.practices.push(newPractice);
     });
   }
