@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import '../../../Library/Caches/typescript/2.9/node_modules/@types/bootstrap';
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Condition } from './condition';

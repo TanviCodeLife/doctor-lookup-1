@@ -37,16 +37,16 @@ export class Practice {
   }
 
   static buildPractice(record) {
-    const practice = new practice(
+    const practice = new Practice(
       record.practices[0].name,
       record.practices[0].visit_address,
       record.practices[0].phones[0].number,
-      record.practices[0].accepts_new_patients,
+      record.practices[0].accepts_new_patients
     );
 
-    if (record.profile.first_name !== undefined) {
+    if (record.profile !== undefined) {
       const doctor = new Doctor(record.profile.first_name, record.profile.last_name);
-      practice.doctor.push(doctor);
+      practice.doctors.push(doctor);
     }
     return practice;
   }
