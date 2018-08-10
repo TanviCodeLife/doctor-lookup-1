@@ -2,18 +2,26 @@ body {
   background-color: #ffffff;
 }
 
-.btn {
-  margin: 20px 0px;
-}
-
-.search-box, .processing-box, .results-box {
+.content {
   margin: 50px auto 0px auto;
   width: 75%;
   max-width: 800px;
 }
 
-.processing-box, .results-box {
-  display: none
+.med-logo {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 6em;
+}
+
+.btn {
+  margin: 20px 0px;
+}
+
+.processing-box {
+  display: none;
+  text-align: center;
 }
 
 .processing-icon {
@@ -28,4 +36,8 @@ body {
   to {
     -webkit-transform: rotate(359deg);
   }
+}
+
+.results-box {
+  display: none;
 }
