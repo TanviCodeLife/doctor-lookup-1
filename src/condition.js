@@ -22,8 +22,12 @@ export class Condition {
   buildConditionsList(apiResponse) {
     const parsedResponse = JSON.parse(apiResponse);
     parsedResponse.data.forEach((condition) => {
-      this.conditionsList.push(condition.name);
+      if (this.notInList(condition.name)) this.conditionsList.push(condition.name);
     });
     this.conditionsList.sort();
+  }
+
+  notInList(condition) {
+    return (!this.conditionsList.includes(condition));
   }
 }
