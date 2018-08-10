@@ -3,7 +3,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Condition } from './condition';
-import { Practice } from './practice';
+import { Doctor } from './doctor';
 
 function loadConditions() {
   const condition = new Condition();
@@ -24,12 +24,12 @@ function addToSelect(conditions) {
   });
 }
 
-function loadPracticeByCondition(condition) {
-  let allPractices = Practice.getPracticeByCondition(condition);
+function resultsByCondition(condition) {
+  let doctorsPromise = Doctor.getByCondition(condition);
 
-  allPractices.then((response) => {
-    const practiceList = Practice.getPracticeList(response);
-    console.log(practiceList);
+  doctorsPromise.then((response) => {
+    const doctorList = Doctor.getDoctorList(response);
+    console.log(doctorList);
   }, (error) => {
     console.log(error.message);
   });
@@ -39,9 +39,8 @@ $(document).ready(function() {
   loadConditions();
 
   $('#search-conditions').click(function() {
-    console.log('clicked search');
     let condition = $('#conditions-select').val();
     console.log(condition);
-    loadPracticeByCondition(condition);
+    resultsByCondition(condition);
   });
 });
