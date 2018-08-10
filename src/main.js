@@ -20,7 +20,6 @@ function loadConditions() {
 
   allConditionsPromise.then((response) => {
     condition.buildConditionsList(response);
-    console.log(condition.conditionsList);
     addToSelect(condition.conditionsList);
   }, (error) => {
     console.log(error.message);
@@ -41,6 +40,7 @@ function resultsByCondition(condition) {
     hideElement('.processing-box');
     showElement('.search-box');
     showElement('.results-box');
+    console.log(doctorList);
     displayResults(doctorList);
   }, (error) => {
     console.log(error.message);
@@ -65,7 +65,12 @@ function appendDoctor(doctor) {
 
 function appendPractices(doctor) {
   doctor.practices.forEach((practice) => {
-    let listItem = `<li>${practice.name}</li>`;
+    let listItem = `<li class='practice-list-item'>
+                      ${practice.name}<br/>
+                      ${practice.phone}<br/>
+                      ${practice.address.street}<br/>
+                      ${practice.address.city}, ${practice.address.state} ${practice.address.zip}<br/>
+                    </li>`;
     $(`#${doctor.firstName}-${doctor.lastName}-practices`).append(listItem);
   });
 }

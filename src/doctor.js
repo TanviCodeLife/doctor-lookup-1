@@ -11,7 +11,6 @@ export class Doctor {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
       let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${condition}&location=or-portland&user_location=45.5122%2C%20122.6587&sort=last-name-asc&skip=0&limit=100&user_key=${process.env.exports.apiKey}`;
-      console.log(url);
       request.onload = function() {
         if (this.status === 200) {
           resolve(request.response);
@@ -27,7 +26,6 @@ export class Doctor {
   static getDoctorList(response) {
     const doctorList = [];
     const parsedResponse = JSON.parse(response);
-    console.log(parsedResponse);
     parsedResponse.data.forEach((record) => {
       if (record.profile !== undefined) {
         let doctor = new Doctor(record.profile.first_name, record.profile.last_name);
@@ -47,6 +45,7 @@ export class Doctor {
         practice.phones.number,
         practice.accepts_new_patients
       );
+      Practice.checkPhone(newPractice);
       doctor.practices.push(newPractice);
     });
   }

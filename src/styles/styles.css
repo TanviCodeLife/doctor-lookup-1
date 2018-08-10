@@ -41,3 +41,12 @@ body {
 .results-box {
   display: none;
 }
+
+ul {
+  list-style-type: none;
+}
+
+.practice-list-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

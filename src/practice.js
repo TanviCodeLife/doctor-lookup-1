@@ -6,4 +6,8 @@ export class Practice {
     this.phone = phone;
     this.newPatients = newPatients;
   }
+
+  static checkPhone(practice) {
+    if (practice.phone === undefined) practice.phone = "No phone number listed.";
+  }
 }
