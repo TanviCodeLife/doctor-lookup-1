@@ -29,18 +29,23 @@ function resultsByCondition(condition) {
 
   doctorsPromise.then((response) => {
     const doctorList = Doctor.getDoctorList(response);
-    console.log(doctorList);
+    toggleProcessingIcon();
+    displayResults(doctorList);
   }, (error) => {
     console.log(error.message);
   });
+}
+
+function toggleProcessingIcon() {
+  
 }
 
 $(document).ready(function() {
   loadConditions();
 
   $('#search-conditions').click(function() {
+    toggleProcessingIcon();
     let condition = $('#conditions-select').val();
-    console.log(condition);
     resultsByCondition(condition);
   });
 });

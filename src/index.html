@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Doctor Lookup</title>
+  <title>PDX Doctor Lookup</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
   <div class="container">
     <div class="search-box">
       <div class="form-group">
-        <label>Select a condition from the list below to search Portland for a matching doctor.</label>
+        <label>Select a condition from the list to search Portland for a matching doctor.</label>
         <select class="form-control" id="conditions-select">
-          <option value="">Select A Condition</option>
+          <option value="">Select a Condition</option>
         </select>
         <button class="btn btn-lg btn-info" id="search-conditions">Search</button>
       </div>
+    </div>
+    <div class="processing-box">
+        <i class="fas fa-sync processing-icon"></i>
+    </div>
+    <div class="results-box">
+      add results here
     </div>
   </div>
 </body>
