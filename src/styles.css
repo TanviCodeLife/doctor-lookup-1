@@ -12,6 +12,10 @@ body {
   max-width: 800px;
 }
 
+.processing-box, .results-box {
+  display: none
+}
+
 .processing-icon {
   font-size: 2.4em;
   -webkit-animation: rotation 2s infinite linear;

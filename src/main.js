@@ -5,6 +5,14 @@ import './styles.css';
 import { Condition } from './condition';
 import { Doctor } from './doctor';
 
+function showElement(element) {
+  $(element).show();
+}
+
+function hideElement(element) {
+  $(element).hide();
+}
+
 function loadConditions() {
   const condition = new Condition();
   let allConditionsPromise = condition.getConditions();
@@ -29,22 +37,45 @@ function resultsByCondition(condition) {
 
   doctorsPromise.then((response) => {
     const doctorList = Doctor.getDoctorList(response);
-    toggleProcessingIcon();
+    hideElement('.processing-box');
+    showElement('.search-box');
+    showElement('.results-box');
     displayResults(doctorList);
   }, (error) => {
     console.log(error.message);
   });
 }
 
-function toggleProcessingIcon() {
-  
+function displayResults(doctors) {
+  doctors.forEach((doctor) => {
+    appendDoctor(doctor);
+    appendPractices(doctor);
+  });
+}
+
+function appendDoctor(doctor) {
+  const doctorCard = `<div class='doctor-card'>
+                        <h2>${doctor.firstName} ${doctor.lastName}</h2>
+                        <ul id='${doctor.firstName}-${doctor.lastName}-practices'>
+                        </ul>
+                      </div>`;
+  $('.results-box').append(doctorCard);
+}
+
+function appendPractices(doctor) {
+  doctor.practices.forEach((practice) => {
+    let listItem = `<li>${practice.name}</li>`;
+    $(`#${doctor.firstName}-${doctor.lastName}-practices`).append(listItem);
+  });
 }
 
 $(document).ready(function() {
   loadConditions();
 
   $('#search-conditions').click(function() {
-    toggleProcessingIcon();
+    hideElement('.search-box');
+    hideElement('.results-box');
+    showElement('.processing-box');
     let condition = $('#conditions-select').val();
     resultsByCondition(condition);
   });
