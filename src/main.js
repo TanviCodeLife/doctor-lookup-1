@@ -14,6 +14,39 @@ function hideElement(element) {
   $(element).hide();
 }
 
+function showResultsUi() {
+  hideElement('.processing-box');
+  showElement('.search-box');
+  showElement('.results-box');
+}
+
+function showErrorUi() {
+  hideElement('.processing-box');
+  showElement('.results-box');
+}
+
+function showSearchingUi() {
+  hideElement('.search-box');
+  hideElement('.results-box');
+  showElement('.processing-box');
+}
+
+function showByConditionUi() {
+  showElement('#search-by-condition');
+  hideElement('.search-by-box');
+}
+
+function showByDoctorUi() {
+  showElement('#search-by-doctor');
+  hideElement('.search-by-box');
+}
+
+function showHomeUi() {
+  hideElement('#search-by-doctor');
+  hideElement('#search-by-condition');
+  showElement('.search-by-box');
+}
+
 function loadConditions() {
   const condition = new Condition();
   let allConditionsPromise = condition.getConditions();
@@ -37,14 +70,11 @@ function resultsByCondition(condition) {
 
   doctorsPromise.then((response) => {
     const doctorList = Doctor.getDoctorList(response);
-    hideElement('.processing-box');
-    showElement('.search-box');
-    showElement('.results-box');
+    showResultsUi();
     console.log(doctorList);
     displayResults(doctorList);
   }, (error) => {
-    hideElement('.processing-box');
-    showElement('.results-box');
+    showErrorUi();
     displayError(error.message);
     console.log(error.message);
   });
@@ -77,7 +107,7 @@ function appendDoctor(doctor, id) {
 
 function appendPractices(doctor, id) {
   doctor.practices.forEach((practice) => {
-    let phoneNumber = formattedPhone(practice.phone);
+    let phoneNumber = formatNumber(practice.phone);
     let listItem = `<li class='practice-list-item'>
                       ${practice.name}<br/>
                       <a href='tel:${phoneNumber}'>${phoneNumber}</a><br/>
@@ -89,7 +119,7 @@ function appendPractices(doctor, id) {
   });
 }
 
-function formattedPhone(phone) {
+function formatNumber(phone) {
   const numbers = phone.split('');
   numbers.splice(3,0,'-');
   numbers.splice(7,0,'-');
@@ -103,7 +133,7 @@ function resetResults() {
 
 function displayError(message) {
   const doctorCard = `<div class='doctor-card'>
-                        <p>There was an error processing your request: ${message}. Please try again.</p>
+                        <p>There was an error processing your request: ${message}.</p>
                       </div>`;
   $('.results-box').append(doctorCard);
 }
@@ -112,11 +142,25 @@ $(document).ready(function() {
   loadConditions();
 
   $('#search-conditions').click(function() {
-    hideElement('.search-box');
-    hideElement('.results-box');
-    showElement('.processing-box');
+    if ($('#conditions-select').val() === '') {
+      showErrorUi();
+      return displayError('Please select an option from the list');
+    }
+
+    showSearchingUi();
     let condition = $('#conditions-select').val();
     resultsByCondition(condition);
+  });
+
+  $('#search-doctors').click(function() {
+    if ($('#doctor-name').val() === '') {
+      showErrorUi();
+      return displayError('Please input a doctor name');
+    }
+
+    showSearchingUi();
+    let doctorName = $('#doctor-name').val();
+    resultsByDoctorName(doctorName);
   });
 
   $('#conditions-select, .btn-back').click(function() {
@@ -124,18 +168,14 @@ $(document).ready(function() {
   });
 
   $('#search-by-condition-option').click(function() {
-    showElement('#search-by-condition');
-    hideElement('.search-by-box');
+    showByConditionUi();
   });
 
   $('#search-by-doctor-option').click(function() {
-    showElement('#search-by-doctor');
-    hideElement('.search-by-box');
+    showByDoctorUi();
   });
 
   $('.btn-back').click(function() {
-    hideElement('#search-by-doctor');
-    hideElement('#search-by-condition');
-    showElement('.search-by-box');
+    showHomeUi();
   });
 });
