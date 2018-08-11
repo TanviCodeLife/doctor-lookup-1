@@ -2,7 +2,7 @@
 
 #### Epicodus JavaScript Independent Project, 08.10.18
 
-#### Abel Trotter
+#### By Abel Trotter
 
 ## Description
 
@@ -44,11 +44,12 @@ A JavaScript app that allows a user to view doctors in the Portland area that me
 * ESLint
 * Jasmine
 * Karma
+* Express
 
 ## Links
 
 * [Github Repo] (https://github.com/atrotter0/doctor-lookup)
-* [Heroku App]
+* [Heroku App] (https://pdx-doctor-lookup.herokuapp.com/)
 
 ## License
 
