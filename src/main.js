@@ -71,12 +71,10 @@ function resultsByCondition(condition) {
   doctorsPromise.then((response) => {
     const doctorList = Doctor.getDoctorList(response);
     showResultsUi();
-    console.log(doctorList);
     displayResults(doctorList);
   }, (error) => {
     showErrorUi();
     displayError(error.message);
-    console.log(error.message);
   });
 }
 
@@ -86,17 +84,15 @@ function resultsByDoctorName(name) {
   doctorsPromise.then((response) => {
     const doctorList = Doctor.getDoctorList(response);
     showResultsUi();
-    console.log(doctorList);
     displayResults(doctorList);
   }, (error) => {
     showErrorUi();
     displayError(error.message);
-    console.log(error.message);
   });
 }
 
 function displayResults(doctors) {
-  if (doctors.length === 0) noResultsFound();
+  if (doctors.length === 0) return noResultsFound();
 
   doctors.forEach((doctor, index) => {
     appendDoctor(doctor, index);
@@ -106,7 +102,7 @@ function displayResults(doctors) {
 
 function noResultsFound() {
   const doctorCard = `<div class='doctor-card'>
-                        <p>No results match your search criteria. Please try again.</p>
+                        <p><i class="fas fa-exclamation-triangle"></i> No results match your search criteria. Please try again.</p>
                       </div>`;
   $('.results-box').append(doctorCard);
 }
@@ -148,7 +144,7 @@ function resetResults() {
 
 function displayError(message) {
   const doctorCard = `<div class='doctor-card'>
-                        <p>There was an error processing your request: ${message}.</p>
+                        <p><i class="fas fa-exclamation-triangle"></i> There was an error processing your request: ${message}.</p>
                       </div>`;
   $('.results-box').append(doctorCard);
 }
@@ -157,6 +153,7 @@ $(document).ready(function() {
   loadConditions();
 
   $('#search-conditions').click(function() {
+    resetResults();
     if ($('#conditions-select').val() === '') {
       showErrorUi();
       return displayError('Please select an option from the list');
@@ -168,6 +165,7 @@ $(document).ready(function() {
   });
 
   $('#search-doctors').click(function() {
+    resetResults();
     if ($('#doctor-name').val() === '') {
       showErrorUi();
       return displayError('Please input a doctor name');
