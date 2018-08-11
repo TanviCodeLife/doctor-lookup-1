@@ -122,4 +122,20 @@ $(document).ready(function() {
   $('#conditions-select').click(function() {
     resetResults();
   });
+
+  $('#search-by-condition-option').click(function() {
+    showElement('#search-by-condition');
+    hideElement('.search-by-box');
+  });
+
+  $('#search-by-doctor-option').click(function() {
+    showElement('#search-by-doctor');
+    hideElement('.search-by-box');
+  });
+
+  $('.btn-back').click(function() {
+    hideElement('#search-by-doctor');
+    hideElement('#search-by-condition');
+    showElement('.search-by-box');
+  });
 });

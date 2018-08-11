@@ -23,6 +23,18 @@ body {
   margin: 20px 0px;
 }
 
+.search-by-box {
+  text-align: center;
+}
+
+.search-by-box .btn {
+  width: 200px;
+}
+
+#search-by-condition, #search-by-doctor {
+  display: none;
+}
+
 .processing-box {
   display: none;
   text-align: center;
