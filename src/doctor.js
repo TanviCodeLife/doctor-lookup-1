@@ -62,8 +62,7 @@ export class Doctor {
         practice.website,
         practice.accepts_new_patients
       );
-      Practice.checkPhone(newPractice);
-      Practice.checkWebsite(newPractice);
+      Practice.checkPracticeProperties(newPractice);
       doctor.practices.push(newPractice);
     });
   }
