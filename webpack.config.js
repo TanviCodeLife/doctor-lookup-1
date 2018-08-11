@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+//const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
@@ -17,9 +17,9 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new UglifyJsPlugin({ sourceMap: true }),
-    new CleanWebpackPlugin(['dist']),
+    //new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Journal Assignment',
+      title: 'PDX Doctor Lookup',
       template: './src/index.html',
       inject: 'body'
     })

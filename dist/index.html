@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDX Doctor Lookup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="content logo-box">
+        <i class="fas fa-user-md med-logo"></i>
+    </div>
+    <div class="content search-box">
+      <div class="search-by-box">
+        <h1>EpicodusMD</h1>
+        <p>How do you want to search for a doctor?</p>
+        <button class="btn btn-lg btn-info" id="search-by-condition-option">By Condition</button>
+        <button class="btn btn-lg btn-info" id="search-by-doctor-option">By Doctor Name</button>
+      </div>
+      <div class="form-group" id="search-by-condition">
+        <label>Select a condition from the list to search Portland for a matching doctor.</label>
+        <select class="form-control" id="conditions-select">
+          <option value="">Select Condition</option>
+        </select>
+        <button class="btn btn-lg btn-info" id="search-conditions">
+          <i class="fas fa-search"></i> 
+          Search
+        </button>
+        <button class="btn btn-lg btn-info btn-back">Back</button>
+      </div>
+      <div class="form-group" id="search-by-doctor">
+          <label>To search Portland for a matching doctor, type in a doctor name in the field below.</label>
+          <input type="text" class="form-control" id="doctor-name">
+          <button class="btn btn-lg btn-info" id="search-doctors">
+            <i class="fas fa-search"></i> 
+            Search
+          </button>
+          <button class="btn btn-lg btn-info btn-back">Back</button>
+        </div>
+    </div>
+    <div class="content processing-box">
+      <h2>Searching...</h2>
+      <div class="processing-icon-box">
+        <i class="fas fa-sync processing-icon"></i>
+      </div>
+    </div>
+    <div class="content results-box">
+    </div>
+  </div>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
