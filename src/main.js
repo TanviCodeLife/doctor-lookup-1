@@ -50,9 +50,9 @@ function resultsByCondition(condition) {
 function displayResults(doctors) {
   if (doctors.length === 0) noResultsFound();
 
-  doctors.forEach((doctor) => {
-    appendDoctor(doctor);
-    appendPractices(doctor);
+  doctors.forEach((doctor, index) => {
+    appendDoctor(doctor, index);
+    appendPractices(doctor, index);
   });
 }
 
@@ -63,16 +63,16 @@ function noResultsFound() {
   $('.results-box').append(doctorCard);
 }
 
-function appendDoctor(doctor) {
+function appendDoctor(doctor, id) {
   const doctorCard = `<div class='doctor-card'>
                         <h2>${doctor.firstName} ${doctor.lastName}</h2>
-                        <ul id='${doctor.firstName}-${doctor.lastName}-practices'>
+                        <ul id='${id}'>
                         </ul>
                       </div>`;
   $('.results-box').append(doctorCard);
 }
 
-function appendPractices(doctor) {
+function appendPractices(doctor, id) {
   doctor.practices.forEach((practice) => {
     let phoneNumber = formattedPhone(practice.phone);
     let listItem = `<li class='practice-list-item'>
@@ -82,7 +82,7 @@ function appendPractices(doctor) {
                       ${practice.address.street}<br/>
                       ${practice.address.city}, ${practice.address.state} ${practice.address.zip}<br/>
                     </li>`;
-    $(`#${doctor.firstName}-${doctor.lastName}-practices`).append(listItem);
+    $(`#${id}`).append(listItem);
   });
 }
 
