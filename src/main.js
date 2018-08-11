@@ -43,6 +43,9 @@ function resultsByCondition(condition) {
     console.log(doctorList);
     displayResults(doctorList);
   }, (error) => {
+    hideElement('.processing-box');
+    showElement('.results-box');
+    displayError();
     console.log(error.message);
   });
 }
@@ -96,6 +99,13 @@ function formattedPhone(phone) {
 
 function resetResults() {
   $('.doctor-card').empty();
+}
+
+function displayError() {
+  const doctorCard = `<div class='doctor-card'>
+                        <p>There was an error processing your request. Please try again</p>
+                      </div>`;
+  $('.results-box').append(doctorCard);
 }
 
 $(document).ready(function() {
