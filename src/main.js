@@ -45,7 +45,7 @@ function resultsByCondition(condition) {
   }, (error) => {
     hideElement('.processing-box');
     showElement('.results-box');
-    displayError();
+    displayError(error.message);
     console.log(error.message);
   });
 }
@@ -101,9 +101,9 @@ function resetResults() {
   $('.doctor-card').empty();
 }
 
-function displayError() {
+function displayError(message) {
   const doctorCard = `<div class='doctor-card'>
-                        <p>There was an error processing your request. Please try again</p>
+                        <p>There was an error processing your request: ${message}. Please try again.</p>
                       </div>`;
   $('.results-box').append(doctorCard);
 }
@@ -119,7 +119,7 @@ $(document).ready(function() {
     resultsByCondition(condition);
   });
 
-  $('#conditions-select').click(function() {
+  $('#conditions-select, .btn-back').click(function() {
     resetResults();
   });
 
