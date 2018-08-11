@@ -80,6 +80,21 @@ function resultsByCondition(condition) {
   });
 }
 
+function resultsByDoctorName(name) {
+  let doctorsPromise = Doctor.getByName(name);
+
+  doctorsPromise.then((response) => {
+    const doctorList = Doctor.getDoctorList(response);
+    showResultsUi();
+    console.log(doctorList);
+    displayResults(doctorList);
+  }, (error) => {
+    showErrorUi();
+    displayError(error.message);
+    console.log(error.message);
+  });
+}
+
 function displayResults(doctors) {
   if (doctors.length === 0) noResultsFound();
 
