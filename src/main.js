@@ -120,7 +120,8 @@ function appendPractices(doctor, id) {
   doctor.practices.forEach((practice) => {
     let phoneNumber = formatNumber(practice.phone);
     let listItem = `<li class='practice-list-item'>
-                      ${practice.name}<br/>
+                      <h5>${practice.name}</h5>
+                      ${practice.newPatients}<br/>
                       <a href='tel:${phoneNumber}'>${phoneNumber}</a><br/>
                       <a href='${practice.website}' target='_blank'>${practice.website}</a><br/>
                       ${practice.address.street}<br/>

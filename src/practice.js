@@ -24,9 +24,9 @@ export class Practice {
 
   static checkNewPatients(practice) {
     if (practice.newPatients === true) {
-      practice.newPatients = "Accepting new patients";
+      practice.newPatients = "Accepting new patients!";
     } else {
-      practice.newPatients = "Not accepting new patients";
+      practice.newPatients = "Not accepting new patients at this time.";
     }
   }
 }
