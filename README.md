@@ -21,6 +21,8 @@ A JavaScript app that allows a user to view doctors in the Portland area that me
 * Install Node.js
 * Install karma-cli globally: `npm install -g karma-cli`
 * Clone the repo
+* Sign up for an API key here: https://developer.betterdoctor.com/
+* Add a .env file at the root level with the following line: `exports.apiKey=ADD_KEY_HERE` where the value is your new api key
 * `npm install` to install dependencies
 * `npm run start` to build and start the dev server
 * `npm run lint` to explicitly run ESLint
